@@ -16,7 +16,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("could not open %s: %s\n", inputFilePath, err)
 	}
-	defer file.Close()
 
 	fmt.Printf("Reading data from %s\n", inputFilePath)
 	fmt.Println("=====================================")
