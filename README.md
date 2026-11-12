@@ -1,2 +1,9 @@
-# httpfromtcp
-Boot.dev "Learn the HTTP Protocol in Go" course
+# HTTP Course
+
+## Running the project
+
+For developers:
+
+```sh
+go run .
+```
