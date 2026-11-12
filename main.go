@@ -5,32 +5,41 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"os"
+	"net"
 	"strings"
 )
 
-const inputFilePath = "messages.txt"
+const port = ":42069"
 
 func main() {
-	file, err := os.Open(inputFilePath)
+	listener, err := net.Listen("tcp", port)
 	if err != nil {
-		log.Fatalf("could not open %s: %s\n", inputFilePath, err)
+		log.Fatalf("error listening for TCP traffic: %s\n", err.Error())
 	}
+	defer listener.Close()
 
-	fmt.Printf("Reading data from %s\n", inputFilePath)
-	fmt.Println("=====================================")
+	fmt.Println("Listening for TCP traffic on", port)
+	for {
+		conn, err := listener.Accept()
+		if err != nil {
+			log.Fatalf("error: %s\n", err.Error())
+		}
+		fmt.Println("Accepted connection from", conn.RemoteAddr())
 
-	linesChannel := getLinesChannel(file)
+		linesChannel := getLinesChannel(conn)
 
-	for line := range linesChannel {
-		fmt.Println("read:", line)
+		for line := range linesChannel {
+			fmt.Println(line)
+		}
+
+		fmt.Println("Connection to", conn.RemoteAddr(), "closed")
 	}
 }
 
-func getLinesChannel(file io.ReadCloser) <-chan string {
+func getLinesChannel(conn io.ReadCloser) <-chan string {
 	lines := make(chan string)
 	go func() {
-		defer file.Close()
+		defer conn.Close()
 		defer close(lines)
 
 		// Go automatically sets the capacity to the length if not provided.
@@ -40,7 +49,7 @@ func getLinesChannel(file io.ReadCloser) <-chan string {
 		current_line := ""
 
 		for {
-			n, err := file.Read(buffer)
+			n, err := conn.Read(buffer)
 			if err != nil {
 				if current_line != "" {
 					lines <- current_line
