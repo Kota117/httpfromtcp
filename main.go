@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"strings"
 )
 
 const inputFilePath = "messages.txt"
@@ -24,9 +25,15 @@ func main() {
 	// Since we explicitely only use what was overwritten from the read (buffer[:n]), it is ok to declare the buffer once instead of on each iteration of the loop.
 	buffer := make([]byte, 8)
 
+	current_line := ""
+
 	for {
 		n, err := file.Read(buffer)
 		if err != nil {
+			if current_line != "" {
+				fmt.Printf("read: %s\n", current_line)
+				current_line = ""
+			}
 			if errors.Is(err, io.EOF) {
 				break
 			}
@@ -34,6 +41,11 @@ func main() {
 			break
 		}
 		str := string(buffer[:n])
-		fmt.Printf("read: %s\n", str)
+		parts := strings.Split(str, "\n")
+		for i := 0; i < len(parts)-1; i++ {
+			fmt.Printf("read: %s%s\n", current_line, parts[i])
+			current_line = ""
+		}
+		current_line += parts[len(parts)-1]
 	}
 }
