@@ -22,7 +22,7 @@ func main() {
 	fmt.Println("=====================================")
 
 	// Go automatically sets the capacity to the length if not provided.
-	// Since we explicitely only use what was overwritten from the read (buffer[:n]), it is ok to declare the buffer once instead of on each iteration of the loop.
+	// Since we explicitly only use what was overwritten from the read (buffer[:n]), it is ok to declare the buffer once instead of on each iteration of the loop.
 	buffer := make([]byte, 8)
 
 	current_line := ""
