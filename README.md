@@ -5,10 +5,20 @@
 Run the listener (and output to a temporary file):
 
 ```sh
-go run . | tee /tmp/tcp.txt
+go run ./cmd/tcplistener | tee /tmp/tcplistener.txt
 ```
 
 In another terminal:
+
+- Create an interactable conncection:
+
+  ```sh
+  nc -v localhost 42069
+  ```
+
+  *Note: The listener must be running or else there will be a `Connection refused` error. This is becuase TCP requires the handshake; UDP does not.*
+
+  Typing any text after this will be logged by the listener. `Ctrl+C` to close the connection.
 
 - Run lesson checks:
 
