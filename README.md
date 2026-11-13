@@ -2,6 +2,8 @@
 
 ## Running the project
 
+### TCP
+
 Run the listener (and output to a temporary file):
 
 ```sh
@@ -37,3 +39,19 @@ In another terminal:
   ```sh
   printf "Do you have what it takes to be an engineer at TheStartup™?\r\n" | nc -w 1 127.0.0.1 42069
   ```
+
+### UDP
+
+Run a netcat listener:
+
+```sh
+nc -u -l 42069
+```
+
+In another terminal, start the UDP sender:
+
+```sh
+go run ./cmd/udpsender
+```
+
+*Note: The listener does not need to be running to send the message; UDP doesn't require the handshake like TCP does.*
