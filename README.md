@@ -55,3 +55,11 @@ go run ./cmd/udpsender
 ```
 
 *Note: The listener does not need to be running to send the message; UDP doesn't require the handshake like TCP does.*
+
+## Testing the project
+
+From the project root:
+
+```sh
+go test ./...
+```
