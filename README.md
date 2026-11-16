@@ -4,7 +4,7 @@
 
 ### TCP
 
-Run the listener (and output to a temporary file):
+**Run the listener (and output to a temporary file):**
 
 ```sh
 go run ./cmd/tcplistener | tee /tmp/tcplistener.txt
@@ -16,29 +16,22 @@ To close the listener:
 Ctrl + C
 ```
 
-In another terminal:
+**In another terminal, send a GET request:**
 
-- Create a persistent conncection:
+```sh
+curl http://localhost:42069/prime/agen
+```
 
-  ```sh
-  nc -v localhost 42069
-  ```
+Expected output:
 
-  *Note: The listener must be running or else there will be a `Connection refused` error. This is becuase TCP requires the handshake; UDP does not.*
+```text
+Request line:
+- Method: GET
+- Target: /prime/agen
+- Version: 1.1
+```
 
-  Typing any text after this will be logged by the listener. `Ctrl+C` to close the connection.
-
-- Run lesson checks:
-
-  ```sh
-  bootdev run
-  ```
-
-- Manually test with one message:
-
-  ```sh
-  printf "Do you have what it takes to be an engineer at TheStartup™?\r\n" | nc -w 1 127.0.0.1 42069
-  ```
+*Note: Currently, this terminal will need to closed with `Ctrl + C` after sending the request since the listener doesn't respond.*
 
 ### UDP
 
