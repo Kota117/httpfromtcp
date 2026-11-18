@@ -7,7 +7,7 @@
 **Run the listener (and output to a temporary file):**
 
 ```sh
-go run ./cmd/tcplistener | tee /tmp/tcplistener.txt
+go run ./cmd/tcplistener | tee /tmp/headers.txt
 ```
 
 To close the listener:
@@ -19,7 +19,7 @@ Ctrl + C
 **In another terminal, send a GET request:**
 
 ```sh
-curl http://localhost:42069/prime/agen
+curl http://localhost:42069/use-neovim-btw
 ```
 
 Expected output:
@@ -27,8 +27,12 @@ Expected output:
 ```text
 Request line:
 - Method: GET
-- Target: /prime/agen
+- Target: /use-neovim-btw
 - Version: 1.1
+Headers:
+- user-agent: curl/8.5.0
+- accept: */*
+- host: localhost:42069
 ```
 
 *Note: Currently, this terminal will need to closed with `Ctrl + C` after sending the request since the listener doesn't respond.*
