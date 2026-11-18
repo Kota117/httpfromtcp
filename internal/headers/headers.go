@@ -45,6 +45,9 @@ func (h Headers) Parse(data []byte) (n int, done bool, err error) {
 
 func (h Headers) Set(key, value string) {
 	key = strings.ToLower(key)
+	if val, found := h[key]; found {
+		value = fmt.Sprintf("%s, %s", val, value)
+	}
 	h[key] = value
 }
 
