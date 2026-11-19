@@ -7,7 +7,7 @@
 **Run the listener (and output to a temporary file):**
 
 ```sh
-go run ./cmd/tcplistener | tee /tmp/headers.txt
+go run ./cmd/tcplistener | tee /tmp/body.txt
 ```
 
 To close the listener:
@@ -19,7 +19,9 @@ Ctrl + C
 **In another terminal, send a GET request:**
 
 ```sh
-curl http://localhost:42069/use-neovim-btw
+curl -X POST http://localhost:42069/coffee \
+-H 'Content-Type: application/json' \
+-d '{"type": "dark mode", "size": "medium"}'
 ```
 
 Expected output:
