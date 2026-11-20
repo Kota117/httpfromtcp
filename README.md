@@ -16,7 +16,7 @@ To close the listener:
 Ctrl + C
 ```
 
-**In another terminal, send a GET request:**
+**In another terminal, send a request:**
 
 ```sh
 curl -X POST http://localhost:42069/coffee \
@@ -61,4 +61,24 @@ From the project root:
 
 ```sh
 go test ./...
+```
+
+### HTTP
+
+**Run the server:**
+
+```sh
+go run ./cmd/httpserver/
+```
+
+**In another terminal, send a request:**
+
+```sh
+curl localhost:42069
+```
+
+Expected output (no matter the request right now):
+
+```text
+Hello World!
 ```
