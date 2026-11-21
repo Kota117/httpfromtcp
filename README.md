@@ -71,14 +71,31 @@ go test ./...
 go run ./cmd/httpserver/
 ```
 
-**In another terminal, send a request:**
+**In another terminal, send a request (with verbose output):**
 
 ```sh
-curl localhost:42069
+curl -v localhost:42069
 ```
 
 Expected output (no matter the request right now):
 
 ```text
+* Host localhost:42069 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:42069...
+* Connected to localhost (::1) port 42069
+> GET / HTTP/1.1
+> Host: localhost:42069
+> User-Agent: curl/8.5.0
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+< Content-Type: text/plain
+* no chunk, no close, no size. Assume close to signal end
+< 
 Hello World!
+* Recv failure: Connection reset by peer
+* Closing connection
+curl: (56) Recv failure: Connection reset by peer
 ```
