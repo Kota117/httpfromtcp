@@ -91,11 +91,9 @@ Expected output (no matter the request right now):
 > Accept: */*
 > 
 < HTTP/1.1 200 OK
-< Content-Type: text/plain
-* no chunk, no close, no size. Assume close to signal end
+< content-length: 0
+< connection: close
+< content-type: text/plain
 < 
-Hello World!
-* Recv failure: Connection reset by peer
 * Closing connection
-curl: (56) Recv failure: Connection reset by peer
 ```
