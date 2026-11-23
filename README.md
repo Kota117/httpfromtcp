@@ -91,9 +91,64 @@ Expected output (no matter the request right now):
 > Accept: */*
 > 
 < HTTP/1.1 200 OK
-< content-length: 0
+< content-length: 15
 < connection: close
 < content-type: text/plain
 < 
+All good, frfr
+* Closing connection
+```
+
+More examples:
+
+```sh
+curl -v localhost:42069/yourproblem
+```
+
+Expected output (no matter the request right now):
+
+```text
+* Host localhost:42069 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:42069...
+* Connected to localhost (::1) port 42069
+> GET /yourproblem HTTP/1.1
+> Host: localhost:42069
+> User-Agent: curl/8.5.0
+> Accept: */*
+> 
+< HTTP/1.1 400 Bad Request
+< content-type: text/plain
+< content-length: 31
+< connection: close
+< 
+Your problem is not my problem
+* Closing connection
+```
+
+```sh
+curl -v localhost:42069/myproblem
+```
+
+Expected output (no matter the request right now):
+
+```text
+* Host localhost:42069 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:42069...
+* Connected to localhost (::1) port 42069
+> GET /myproblem HTTP/1.1
+> Host: localhost:42069
+> User-Agent: curl/8.5.0
+> Accept: */*
+> 
+< HTTP/1.1 500 Internal Server Error
+< content-length: 16
+< connection: close
+< content-type: text/plain
+< 
+Woopsie, my bad
 * Closing connection
 ```
