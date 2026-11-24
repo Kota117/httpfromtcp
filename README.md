@@ -91,11 +91,19 @@ Expected output (no matter the request right now):
 > Accept: */*
 > 
 < HTTP/1.1 200 OK
-< content-length: 15
+< content-type: text/html
+< content-length: 129
 < connection: close
-< content-type: text/plain
 < 
-All good, frfr
+<html>
+<head>
+<title>200 OK</title>
+</head>
+<body>
+<h1>Success!</h1>
+<p>Your request was an absolute banger.</p>
+</body>
+</html>
 * Closing connection
 ```
 
@@ -119,11 +127,19 @@ Expected output (no matter the request right now):
 > Accept: */*
 > 
 < HTTP/1.1 400 Bad Request
-< content-type: text/plain
-< content-length: 31
+< content-length: 140
 < connection: close
+< content-type: text/html
 < 
-Your problem is not my problem
+<html>
+<head>
+<title>400 Bad Request</title>
+</head>
+<body>
+<h1>Bad Request</h1>
+<p>Your request honestly kinda sucked.</p>
+</body>
+</html>
 * Closing connection
 ```
 
@@ -145,10 +161,18 @@ Expected output (no matter the request right now):
 > Accept: */*
 > 
 < HTTP/1.1 500 Internal Server Error
-< content-length: 16
+< content-length: 164
 < connection: close
-< content-type: text/plain
+< content-type: text/html
 < 
-Woopsie, my bad
+<html>
+<head>
+<title>500 Internal Server Error</title>
+</head>
+<body>
+<h1>Internal Server Error</h1>
+<p>Okay, you know what? This one is on me.</p>
+</body>
+</html>
 * Closing connection
 ```
